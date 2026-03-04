@@ -1,3 +1,6 @@
+/* =====================
+   DESIGN SYSTEM
+===================== */
 :root {
   --primary: #6366f1;
   --primary-dark: #4f46e5;
@@ -7,13 +10,10 @@
   --bg-card: #ffffff;
   --text-main: #1e293b;
   --text-muted: #64748b;
-  --glass: rgba(255, 255, 255, 0.8);
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-    0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --glass: rgba(255, 255, 255, 0.85);
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-md: 0 10px 20px rgba(0,0,0,0.12);
+  --transition: all 0.3s ease;
 }
 
 * {
@@ -22,60 +22,67 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   font-family: 'Outfit', sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
-  overflow-x: hidden;
-}
-
-.container {
-  max-width: 1280px;
-  margin: auto;
-  padding: 0 24px;
-}
-
-.section {
-  padding: 100px 0;
 }
 
 /* =====================
-   NAVIGATION
+   LAYOUT
+===================== */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 90px 0;
+}
+
+/* =====================
+   HEADER
 ===================== */
 .header {
   position: sticky;
   top: 0;
-  background: var(--glass);
-  backdrop-filter: blur(12px);
   z-index: 1000;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
 }
 
 .header-container {
+  height: 72px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 80px;
+  justify-content: space-between;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  font-size: 1.3rem;
   font-weight: 700;
-  font-size: 1.25rem;
   color: var(--primary-dark);
+  text-decoration: none;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 32px;
+  gap: 28px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.nav-link:hover {
+  color: var(--primary);
 }
 
 /* =====================
@@ -84,27 +91,77 @@ body {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
   padding: 14px 28px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.95rem;
-  text-decoration: none;
   border: none;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .btn-primary {
   background: var(--primary);
-  color: white;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
 }
 
 /* =====================
    HERO
 ===================== */
+.hero {
+  padding-top: 60px;
+}
+
 .hero-container {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 60px;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+/* =====================
+   PRODUCT CARDS
+===================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
 }
 
 /* =====================
@@ -112,42 +169,87 @@ body {
 ===================== */
 .whatsapp-float {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 64px;
-  height: 64px;
+  bottom: 26px;
+  right: 26px;
+  width: 60px;
+  height: 60px;
   background: var(--accent);
-  color: white;
+  color: #fff;
   border-radius: 50%;
-  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  z-index: 1000;
 }
 
 /* =====================
-   MOBILE FIX (FINAL)
+   FOOTER
+===================== */
+.footer {
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 70px 0 30px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 50px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.85rem;
+}
+
+/* =====================
+   MOBILE FIX (PROPER)
 ===================== */
 @media (max-width: 768px) {
 
-  /* ❌ Hamburger / teen line menu HIDE */
-  .header button,
-  .header .menu,
-  .header .menu-toggle,
-  .header .hamburger {
-    display: none !important;
-  }
-
-  /* ❌ Nav links already hidden */
-  .nav-links {
+  /* Header + hamburger fully hide */
+  .header {
     display: none;
   }
 
-  /* 📞 Call Now chhota */
-  .btn-primary {
-    padding: 10px 18px;
-    font-size: 0.85rem;
-    border-radius: 10px;
+  .section {
+    padding: 60px 0;
+  }
+
+  .hero {
+    padding-top: 20px;
   }
 
   .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin: 0 auto 24px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary {
+    width: 100%;
+    max-width: 240px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .footer-container {
     grid-template-columns: 1fr;
     text-align: center;
   }
@@ -155,15 +257,18 @@ body {
 
 @media (max-width: 480px) {
 
-  /* 📞 Call Now aur chhota */
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
   .btn-primary {
-    padding: 8px 16px;
     font-size: 0.8rem;
+    padding: 8px 14px;
   }
 
   .whatsapp-float {
-    width: 54px;
-    height: 54px;
-    font-size: 26px;
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
   }
 }
