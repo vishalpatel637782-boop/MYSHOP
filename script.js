@@ -6,22 +6,44 @@ if (menuBtn && navLinks) {
   menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     navLinks.classList.toggle("active");
+    // Menu icon change animation
+    const icon = menuBtn.querySelector('i');
+    icon.classList.toggle('bx-menu');
+    icon.classList.toggle('bx-x');
   });
 
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("active");
+      const icon = menuBtn.querySelector('i');
+      icon.classList.add('bx-menu');
+      icon.classList.remove('bx-x');
     });
   });
 
   document.addEventListener("click", (e) => {
     if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
       navLinks.classList.remove("active");
+      const icon = menuBtn.querySelector('i');
+      if(icon) {
+        icon.classList.add('bx-menu');
+        icon.classList.remove('bx-x');
+      }
     }
   });
 }
 
-// Scroll Reveal
+// Header Scroll Effect
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) {
+        header.classList.add('header-scrolled');
+    } else {
+        header.classList.remove('header-scrolled');
+    }
+});
+
+// Scroll Reveal Observer
 const reveal = () => {
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -40,7 +62,6 @@ window.addEventListener('DOMContentLoaded', reveal);
 // WhatsApp Click Tracking
 const trackWhatsAppClick = async (productName = 'General') => {
   try {
-    // Firing tracking call
     fetch('http://localhost:3001/api/track-whatsapp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -55,11 +76,8 @@ const trackWhatsAppClick = async (productName = 'General') => {
   }
 };
 
-// Add click listeners to all WhatsApp links
 document.querySelectorAll('.whatsapp-link, .whatsapp-float').forEach(link => {
-  link.addEventListener('click', async (e) => {
-    // We don't prevent default, just fire the tracking call
-    // If you want to ensure tracking finishes before redirect, use e.preventDefault() and then window.open
+  link.addEventListener('click', (e) => {
     const productName = link.closest('.product-card')?.querySelector('h3')?.innerText || 'General';
     trackWhatsAppClick(productName);
   });
